@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:23:19 by gde-mora          #+#    #+#             */
-/*   Updated: 2022/11/22 05:13:06 by gde-mora         ###   ########.fr       */
+/*   Updated: 2022/11/23 03:30:39 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,40 @@
 int	ft_pow(int basis, int exp)
 {
 	int	i;
-	int number;
+	int	number;
 
 	i = 0;
 	number = 1;
-	while (i != exp) //
+	while (i != exp)
 	{
 		number = number * basis;
 		i++;
 	}
 	return (number);
-}                      //void	add_char_to_str
+}
+
+void	add_char_to_str(char c)
+{
+	static char	*str;
+	char		*aux;	
+
+	if (!str && c == '\0')
+		return ;
+	else if (c == '\0')
+	{
+		ft_printf("%s\n", str);
+		free(str);
+		str = NULL;
+	}
+	else
+	{
+		aux = malloc(2);
+		aux[0] = c;
+		aux[1] = '\0';
+		str = ft_strjoin_gnl(str, aux);
+		free(aux);
+	}
+}
 
 void	add_bit_to_byte(int boolean)
 {
@@ -36,10 +59,7 @@ void	add_bit_to_byte(int boolean)
 	bits++;
 	if (bits == 8)
 	{
-	//	if (number == '\0')
-	//		ft_putchar_fd('\n', 1);
-	//	else
-		ft_putchar_fd(number, 1);
+		add_char_to_str(number);
 		bits = 0;
 		number = 0;
 	}
@@ -47,28 +67,22 @@ void	add_bit_to_byte(int boolean)
 
 void	handler_sigusr(int sigusr, siginfo_t *info, void *context)
 {
-	//static int	counter;   //usar isso?
-
 	(void)context;
 	if (sigusr == SIGUSR1)
 	{
 		add_bit_to_byte(1);
-	//	counter = 0;
-		kill(info->si_pid, SIGUSR1);
+		if (kill(info->si_pid, SIGUSR1) == -1)
+			finish_error(ERROR_PID_S);
 	}
 	else if (sigusr == SIGUSR2)
 	{
-	/*	if (counter++ == 8)
-			ft_putchar_fd('\n', 1);
-		else
-		{*/
-			add_bit_to_byte(0);
-			kill(info->si_pid, SIGUSR1);
-	//	}
+		add_bit_to_byte(0);
+		if (kill(info->si_pid, SIGUSR1) == -1)
+			finish_error(ERROR_PID_S);
 	}
 }
 
-int main(void)
+int	main(void)
 {
 	struct sigaction	sa;
 	sigset_t			mask;

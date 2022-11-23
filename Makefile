@@ -6,19 +6,19 @@
 #    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/29 02:00:21 by gde-mora          #+#    #+#              #
-#    Updated: 2022/11/14 21:22:28 by gde-mora         ###   ########.fr        #
+#    Updated: 2022/11/22 06:21:11 by gde-mora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_CLIENT = client
 
-SRC_CLIENT = client.c
+SRC_CLIENT = client.c finish_error.c
 
 OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
 
 NAME_SERVER = server
 
-SRC_SERVER = server.c
+SRC_SERVER = server.c finish_error.c
 
 OBJ_SERVER = $(SRC_SERVER:.c=.o)
 

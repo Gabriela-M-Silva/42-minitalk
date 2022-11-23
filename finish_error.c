@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   finish_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/03 07:36:50 by gde-mora          #+#    #+#             */
-/*   Updated: 2022/11/22 22:59:08 by gde-mora         ###   ########.fr       */
+/*   Created: 2022/11/22 05:52:47 by gde-mora          #+#    #+#             */
+/*   Updated: 2022/11/23 03:31:01 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minitalk.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	finish_error(int flag)
 {
-	char	*nstr;
-	size_t	size_nstr;
-
-	size_nstr = ft_strlen(s1) + ft_strlen(s2);
-	nstr = (char *)malloc(sizeof(char) * (size_nstr + 1));
-	if (!nstr)
-		return (NULL);
-	ft_strlcpy(nstr, s1, ft_strlen(s1) + 1);
-	ft_strlcat(nstr, s2, size_nstr + 1);
-	return (nstr);
+	if (flag == 1)
+	{
+		ft_printf("Invalid arguments.\n");
+		ft_printf("./client [PID] [string]\n");
+	}
+	else if (flag == 2)
+		ft_printf("Error. Invalid pid or server response.\n");
+	else if (flag == 3)
+		ft_printf("Error. Invalid pid or client response.\n");
+	exit (0);
 }
