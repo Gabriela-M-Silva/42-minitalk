@@ -14,3 +14,5 @@ os bytes e monta a string novamente. <br>
 Além disso, a cada bit enviado, o client entra em pause() e espera confirmação <br>
 do server de que pode enviar o próximo. Esse tratamento garante que nenhum bit <br>
 será perdido, evitando erros de transmissão. <br>
+<br>
+![minitalk](https://user-images.githubusercontent.com/90937264/203866502-0ff84d09-f15d-45da-a32c-e2c3f3942bc0.png)
