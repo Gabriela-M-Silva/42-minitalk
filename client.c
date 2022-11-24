@@ -6,13 +6,12 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:22:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2022/11/23 03:29:11 by gde-mora         ###   ########.fr       */
+/*   Updated: 2022/11/24 18:04:35 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-//global PID
 t_send	g_send;
 
 void	send_null_byte(int flag)
@@ -34,7 +33,7 @@ void	send_null_byte(int flag)
 		}
 		else
 			ft_putstr_fd("Process finished.\n", 1);
-		exit (0);
+		exit(0);
 	}
 }
 
@@ -91,6 +90,11 @@ int	main(int argc, char **argv)
 	if (argc != 3)
 		finish_error(ERROR_ARG);
 	g_send.pid = ft_atoi(argv[1]);
+	if (g_send.pid < 1)
+	{
+		ft_putstr_fd("Error. Invalid process.\n", 1);
+		exit(0);
+	}
 	sigemptyset(&mask);
 	g_send.msg = argv[2];
 	sa.sa_flags = SA_SIGINFO;
